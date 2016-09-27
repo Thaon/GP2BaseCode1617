@@ -1,5 +1,4 @@
 #include "MyGame.h"
-#undef main
 
 int main(int argc, char * arg[])
 {
