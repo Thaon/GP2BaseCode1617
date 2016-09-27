@@ -19,7 +19,7 @@
 //Name space std, so we don't need to do std::vector
 using namespace std;
 
-//Gloew
+//Glew
 #include <GL/glew.h>
 //SDL
 #include <SDL.h>
