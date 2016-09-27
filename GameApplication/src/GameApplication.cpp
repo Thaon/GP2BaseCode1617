@@ -126,9 +126,9 @@ void GameApplication::run()
 			//Get event type
 			if (event.type == SDL_WINDOWEVENT)
 			{
-				switch (event.window.type)
+				switch (event.window.event)
 				{
-					case SDL_QUIT || SDL_WINDOWEVENT_CLOSE:
+					case SDL_WINDOWEVENT_CLOSE:
 						m_bIsRunning = false;
 					break;
 
@@ -140,18 +140,50 @@ void GameApplication::run()
 						LOG(INFO, "window maximised");
 					break;
 
-					case SDL_WINDOWEVENT_RESIZED:
-						LOG(INFO, "window resized to: " + event.window.data2);
+					case SDL_WINDOWEVENT_RESTORED:
+						LOG(INFO, "window restored from tray");
 					break;
+
+					case SDL_WINDOWEVENT_RESIZED:
+						LOG(INFO, "window resized to: %d x %d", event.window.data1, event.window.data2);
+					break;
+
+
 				}
 			}
 			else switch (event.type)
 			{
 				case SDL_KEYDOWN:
-					if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
+					switch (event.key.keysym.scancode)
 					{
-						m_bIsRunning = false;
+						case SDL_SCANCODE_ESCAPE:
+							m_bIsRunning = false;
+						break;
+
+						case SDL_SCANCODE_F4:
+							if (m_isFullScreen)
+							{
+								//we get our previous dimensions for the window
+								SDL_SetWindowFullscreen(m_pWindow, 0);
+								SDL_SetWindowSize(m_pWindow, m_WindowWidth, m_WindowHeight);
+							}
+							else
+							{
+								//we need to get the native desktop resolution and scale/resize the window
+								SDL_DisplayMode current;
+								SDL_GetDesktopDisplayMode(0, &current);
+								SDL_SetWindowSize(m_pWindow, current.w, current.h);
+								SDL_SetWindowFullscreen(m_pWindow, SDL_WINDOW_FULLSCREEN);
+							}
+
+							m_isFullScreen = !m_isFullScreen;
+						break;
 					}
+
+				break;
+
+				case SDL_QUIT:
+					m_bIsRunning = false;
 				break;
 			}
 		}

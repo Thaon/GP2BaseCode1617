@@ -56,6 +56,8 @@ protected:
 	unsigned int m_WindowHeight;
 	unsigned int m_WindowCreationFlags;
 
+	bool m_isFullScreen = false;
+
 	ProgramOptions m_Options;
 
 	void parseConfig(int args,char * arg[]);
