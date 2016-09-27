@@ -6,7 +6,7 @@ GameApplication::GameApplication()
  	m_pWindow=nullptr;
 	m_WindowWidth=640;
 	m_WindowHeight=480;
-	m_WindowCreationFlags=0;
+	m_WindowCreationFlags=SDL_WINDOW_RESIZABLE;
   CREATELOG("log.txt");
 }
 
@@ -124,9 +124,35 @@ void GameApplication::run()
 		//While we still have events in the queue
 		while (SDL_PollEvent(&event)) {
 			//Get event type
-			if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
-				//set our boolean which controls the loop to false
-				m_bIsRunning = false;
+			if (event.type == SDL_WINDOWEVENT)
+			{
+				switch (event.window.type)
+				{
+					case SDL_QUIT || SDL_WINDOWEVENT_CLOSE:
+						m_bIsRunning = false;
+					break;
+
+					case SDL_WINDOWEVENT_MINIMIZED:
+						LOG(INFO, "window minimised");
+					break;
+
+					case SDL_WINDOWEVENT_MAXIMIZED:
+						LOG(INFO, "window maximised");
+					break;
+
+					case SDL_WINDOWEVENT_RESIZED:
+						LOG(INFO, "window resized to: " + event.window.data2);
+					break;
+				}
+			}
+			else switch (event.type)
+			{
+				case SDL_KEYDOWN:
+					if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
+					{
+						m_bIsRunning = false;
+					}
+				break;
 			}
 		}
 		//init Scene
