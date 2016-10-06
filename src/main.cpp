@@ -3,10 +3,10 @@
 
 int main(int argc, char * arg[])
 {
-	unique_ptr<MyGame> pGame(new MyGame);
+	std::unique_ptr<MyGame> pGame(new MyGame);
 
-	pGame->init(argc,arg);
-	pGame->run();
+	pGame->Init(argc,arg);
+	pGame->Run();
 
 	return 0;
 }

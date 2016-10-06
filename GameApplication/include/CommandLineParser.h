@@ -11,6 +11,6 @@ public:
 
   void parse(ProgramOptions &options);
 private:
-  vector<string> m_CommandArguments;
+  std::vector<std::string> m_CommandArguments;
 };
 #endif

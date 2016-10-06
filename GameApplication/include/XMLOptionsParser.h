@@ -7,12 +7,12 @@
 class XMLOptionsParser:public OptionParser
 {
 public:
-  XMLOptionsParser(const string& filename);
+  XMLOptionsParser(const std::string& filename);
   ~XMLOptionsParser();
 
   void parse(ProgramOptions &options);
 private:
-  string m_Filename;
+  std::string m_Filename;
 };
 
 #endif

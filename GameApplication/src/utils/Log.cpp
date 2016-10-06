@@ -2,7 +2,7 @@
 #include "utils/time.h"
 
 //enumeration types (both scoped and unscoped) can have overloaded operators
-ostream& operator<<(std::ostream& os, LogLevel level)
+std::iostream& operator<<(std::iostream& os, LogLevel level)
 {
     switch(level)
     {
@@ -25,11 +25,11 @@ Log::~Log()
   close();
 }
 
-void Log::create(const string& filename)
+void Log::create(const std::string& filename)
 {
   m_FileStream.open(filename.c_str());
-  cout<<"Log Created on "<<getLocalTimeStr()<<endl;
-  m_FileStream<<"Log Created on "<<getLocalTimeStr()<<endl;
+  std::cout<<"Log Created on "<<getLocalTimeStr()<<std::endl;
+  m_FileStream<<"Log Created on "<<getLocalTimeStr()<<std::endl;
 }
 
 void Log::write(unsigned int level,const char* format, ...)
@@ -47,9 +47,9 @@ void Log::write(unsigned int level,const char* format, ...)
                va);
     va_end (va);
 
-    stringstream ss;
-    ss<<(LogLevel)level<<" "<<getLocalTimeStr()<<" "<<buffer<<endl;
-    cout<<ss.str();
+    std::stringstream ss;
+    ss<<(LogLevel)level<<" "<<getLocalTimeStr()<<" "<<buffer<<std::endl;
+    std::cout<<ss.str();
     m_LogMessages.push(ss.str());
     ss.clear();
     if (m_LogMessages.size()>=10)

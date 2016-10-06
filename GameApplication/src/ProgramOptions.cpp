@@ -1,6 +1,6 @@
 #include "ProgramOptions.h"
 
-ostream& operator<<(std::ostream& os, ProgramOptions& options)
+std::ostream& operator<<(std::ostream& os, ProgramOptions& options)
 {
     auto begin=options.begin();
     auto end=options.end();
@@ -18,30 +18,30 @@ ProgramOptions::ProgramOptions()
 
 ProgramOptions::~ProgramOptions()
 {
-  m_Options.clear();
+  m_options.clear();
 }
 
-void ProgramOptions::addOption(const string& name, const string& value)
+void ProgramOptions::addOption(const std::string& name, const std::string& value)
 {
-  m_Options[name]=value;
+  m_options[name]=value;
 }
 
-const string& ProgramOptions::getOption(const string& name)
+const std::string& ProgramOptions::getOption(const std::string& name)
 {
-  return m_Options[name];
+  return m_options[name];
 }
 
-float ProgramOptions::getOptionAsFloat(const string& name)
+float ProgramOptions::getOptionAsFloat(const std::string& name)
 {
-  return stof(m_Options[name]);
+  return stof(m_options[name]);
 }
 
-int ProgramOptions::getOptionAsInt(const string& name)
+int ProgramOptions::getOptionAsInt(const std::string& name)
 {
-    return stoi(m_Options[name]);
+    return stoi(m_options[name]);
 }
 
-bool ProgramOptions::getOptionAsBool(const string& name)
+bool ProgramOptions::getOptionAsBool(const std::string& name)
 {
-    return (bool)stoi(m_Options[name]);
+    return (bool)stoi(m_options[name]);
 }

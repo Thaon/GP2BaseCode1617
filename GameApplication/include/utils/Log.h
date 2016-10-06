@@ -21,7 +21,7 @@ class Log:public NonCopyable
 public:
   ~Log();
 
-  void create(const string& filename);
+  void create(const std::string& filename);
   void write(unsigned int level,const char* format, ...);
   void flush();
   void close();
@@ -35,8 +35,8 @@ public:
 private:
   Log();
   unsigned int m_CurrentLevel;
-  ofstream m_FileStream;
-  queue<string> m_LogMessages;
+  std::ofstream m_FileStream;
+  std::queue<std::string> m_LogMessages;
   int m_MessageBufferSize;
 };
 

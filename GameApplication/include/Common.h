@@ -16,10 +16,7 @@
 #include <ctime>
 #include <cstdarg>
 
-//Name space std, so we don't need to do std::vector
-using namespace std;
-
-//Gloew
+//Glew
 #include <GL/glew.h>
 //SDL
 #include <SDL.h>
@@ -30,7 +27,6 @@ using namespace std;
 #define GLM_FORCE_RADIANS
 //maths headers
 #include <glm/glm.hpp>
-using namespace glm;
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>

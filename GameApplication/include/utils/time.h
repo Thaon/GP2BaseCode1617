@@ -7,6 +7,6 @@
 
 using namespace std;
 
-const string getLocalTimeStr();
+const std::string getLocalTimeStr();
 
 #endif

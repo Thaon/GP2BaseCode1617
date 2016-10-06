@@ -4,7 +4,7 @@
 
 using namespace tinyxml2;
 
-XMLOptionsParser::XMLOptionsParser(const string& filename)
+XMLOptionsParser::XMLOptionsParser(const std::string& filename)
 {
   m_Filename=filename;
 }
@@ -29,8 +29,8 @@ void XMLOptionsParser::parse(ProgramOptions &options)
   XMLHandle hDoc(&doc);
   XMLElement* pCurrentElement;
   const XMLAttribute* pCurrentAttribute;
-  string currentKey;
-  string currentValue;
+  std::string currentKey;
+  std::string currentValue;
   XMLHandle hRoot(0);
 
   pCurrentElement = hDoc.FirstChildElement().ToElement();
@@ -53,7 +53,7 @@ void XMLOptionsParser::parse(ProgramOptions &options)
     {
       currentKey.clear();
       currentValue.clear();
-      currentKey=string(string(pCurrentElement->Value())+string(pCurrentAttribute->Name()));
+      currentKey=std::string(std::string(pCurrentElement->Value())+std::string(pCurrentAttribute->Name()));
 	  currentValue = pCurrentAttribute->Value();
 
 

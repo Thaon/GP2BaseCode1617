@@ -1,5 +1,5 @@
-#ifndef _PROGRAM_OPTIONS_H
-#define _PROGRAM_OPTIONS_H
+#ifndef _PROGRAm_options_H
+#define _PROGRAm_options_H
 
 #include "Common.h"
 
@@ -9,23 +9,23 @@ public:
   ProgramOptions();
   ~ProgramOptions();
 
-  void addOption(const string& name, const string& value);
-  const string& getOption(const string& name);
-  float getOptionAsFloat(const string& name);
-  int getOptionAsInt(const string& name);
-  bool getOptionAsBool(const string& name);
-  map<string,string>::iterator begin()
+  void addOption(const std::string& name, const std::string& value);
+  const std::string& getOption(const std::string& name);
+  float getOptionAsFloat(const std::string& name);
+  int getOptionAsInt(const std::string& name);
+  bool getOptionAsBool(const std::string& name);
+  std::map<std::string,std::string>::iterator begin()
   {
-    return m_Options.begin();
+    return m_options.begin();
   };
 
-  map<string,string>::iterator end()
+  std::map<std::string,std::string>::iterator end()
   {
-    return m_Options.end();
+    return m_options.end();
   };
 
-  friend ostream& operator<<(ostream& os, ProgramOptions& options);
+  friend std::ostream& operator<<(std::ostream& os, ProgramOptions& options);
 private:
-  map<string,string> m_Options;
+  std::map<std::string,std::string> m_options;
 };
 #endif
