@@ -2,6 +2,8 @@
 #define _GAMEAPPLICATION_H
 
 #include "Common.h"
+#include "Shader.h"
+#include "Texture.h"
 #include "CommandLineParser.h"
 #include "XMLOptionsParser.h"
 #include "ProgramOptions.h"
@@ -21,6 +23,7 @@ public:
 	virtual bool Init(int args,char * arg[]);
 	virtual bool InitGraphics();
 	virtual void InitScene();
+	virtual void DestroyScene();
 	virtual void Update();
 	virtual void OnBeginRender();
 	virtual void Render();

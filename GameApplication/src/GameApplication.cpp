@@ -96,9 +96,9 @@ bool GameApplication::InitGraphics()
 {
 	//OpenGl Context
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
-		SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
+		SDL_GL_CONTEXT_PROFILE_CORE);
 
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 	m_GLcontext = SDL_GL_CreateContext(m_pWindow);
 
@@ -153,24 +153,28 @@ void GameApplication::SetViewport(int width, int height)
 	//Setup viewport
 	glViewport(0, 0, (GLsizei)width, (GLsizei)height);
 
-	//Change to projection matrix mode
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
+	////Change to projection matrix mode
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadIdentity();
 
-	//Calculate perspective matrix, using gLM
-	glm::mat4 projectionMatrix = glm::perspective(glm::radians(45.0f), ratio,
-		0.1f, 100.0f);
-	glLoadMatrixf(&projectionMatrix[0][0]);
+	////Calculate perspective matrix, using gLM
+	//glm::mat4 projectionMatrix = glm::perspective(glm::radians(45.0f), ratio,
+	//	0.1f, 100.0f);
+	//glLoadMatrixf(&projectionMatrix[0][0]);
 
-	//Switch to ModelView
-	glMatrixMode(GL_MODELVIEW);
+	////Switch to ModelView
+	//glMatrixMode(GL_MODELVIEW);
 
-	//Reset using the Identity Matrix
-	glLoadIdentity();
+	////Reset using the Identity Matrix
+	//glLoadIdentity();
 }
 
 
 void GameApplication::InitScene()
+{
+}
+
+void GameApplication::DestroyScene()
 {
 }
 
@@ -194,19 +198,19 @@ void GameApplication::OnEndRender()
 
 void GameApplication::Render()
 {
-	//Switch to ModelView
-	glMatrixMode(GL_MODELVIEW);
-	//Reset using the Identity Matrix
-	glLoadIdentity();
-	//Translate to -5.0f on z-axis
-	glTranslatef(0.0f, 0.0f, -5.0f);
-	//Begin drawing triangles
-	glBegin(GL_TRIANGLES);
-	glColor3f(1.0f, 0.0f, 0.0f); //Colour of the vertices
-	glVertex3f(0.0f, 1.0f, 0.0f); // Top
-	glVertex3f(-1.0f, -1.0f, 0.0f); // Bottom Left
-	glVertex3f(1.0f, -1.0f, 0.0f); // Bottom Right
-	glEnd();
+	////Switch to ModelView
+	//glMatrixMode(GL_MODELVIEW);
+	////Reset using the Identity Matrix
+	//glLoadIdentity();
+	////Translate to -5.0f on z-axis
+	//glTranslatef(0.0f, 0.0f, -5.0f);
+	////Begin drawing triangles
+	//glBegin(GL_TRIANGLES);
+	//glColor3f(1.0f, 0.0f, 0.0f); //Colour of the vertices
+	//glVertex3f(0.0f, 1.0f, 0.0f); // Top
+	//glVertex3f(-1.0f, -1.0f, 0.0f); // Bottom Left
+	//glVertex3f(1.0f, -1.0f, 0.0f); // Bottom Right
+	//glEnd();
 }
 
 void GameApplication::OnRenderGUI()
@@ -217,6 +221,7 @@ void GameApplication::OnRenderGUI()
 void GameApplication::Destroy()
 {
 	// clean up, reverse order!!!
+	DestroyScene();
 	SDL_GL_DeleteContext(m_GLcontext);
 	SDL_DestroyWindow(m_pWindow);
 	IMG_Quit();

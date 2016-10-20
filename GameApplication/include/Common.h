@@ -32,4 +32,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/string_cast.hpp>
 
+//utlities
+#include "utils\Log.h"
+
 #endif
