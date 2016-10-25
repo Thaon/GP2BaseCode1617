@@ -1,11 +1,5 @@
 #include "MyGame.h"
 
-struct Vertex {
-	float x, y, z;
-	float r, g, b, a;
-	float u, v;
-};
-
 const std::string ASSET_PATH = "Assets";
 const std::string SHADER_PATH = "/Shaders";
 const std::string TEXTURE_PATH = "/Textures";
@@ -43,12 +37,12 @@ void MyGame::InitScene()
 
 	//initialising vertices
 	Vertex verts[] = { //position, color, UV
-		{ -0.5f, -0.5f, 0.0f, 1, 1, 1, 1, 0, 0 },
-		{ 0.5f, -0.5f, 0.0f, 1, 1, 1, 1, 1, 0 },
-		{ 0.5f,  0.5f, 0.0f, 1, 1, 1, 1, 1, 1 },
-		{ 0.5f,  0.5f, 0.0f, 1, 1, 1, 1, 1, 1 },
-		{ -0.5f,  0.5f, 0.0f, 1, 1, 1, 1, 0, 1 },
-		{ -0.5f, -0.5f, 0.0f, 1, 1, 1, 1, 0, 0 },
+		{ glm::vec3(-0.5f, -0.5f, 0.0f), glm::vec4(1, 1, 1, 1), glm::vec2(0, 0) },
+		{ glm::vec3(0.5f, -0.5f, 0.0f), glm::vec4(1, 1, 1, 1), glm::vec2(1, 0) },
+		{ glm::vec3(0.5f,  0.5f, 0.0f), glm::vec4(1, 1, 1, 1), glm::vec2(1, 1) },
+		{ glm::vec3(0.5f,  0.5f, 0.0f), glm::vec4(1, 1, 1, 1), glm::vec2(1, 1) },
+		{ glm::vec3(-0.5f,  0.5f, 0.0f), glm::vec4(1, 1, 1, 1), glm::vec2(0, 1) },
+		{ glm::vec3(-0.5f, -0.5f, 0.0f), glm::vec4(1, 1, 1, 1), glm::vec2(0, 0) },
 	};
 
 	//------------------------------------------------------------------------------------------------------
@@ -65,13 +59,13 @@ void MyGame::InitScene()
 
 	//defining vertex attributes
 	glEnableVertexAttribArray(0); //pos
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), NULL);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void**)offsetof(Vertex, position));
 
 	glEnableVertexAttribArray(1); //col
-	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void**)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void**)offsetof(Vertex, colour));
 
 	glEnableVertexAttribArray(2); //UV
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void**)(7 * sizeof(float)));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void**)offsetof(Vertex, texCoords));
 
 	//------------------------------------------------------------------------------------------------------
 	//loading Vertex and Fragment shaders from file

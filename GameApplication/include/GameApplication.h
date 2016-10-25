@@ -8,6 +8,7 @@
 #include "XMLOptionsParser.h"
 #include "ProgramOptions.h"
 #include "utils/NonCopyable.h"
+#include "GameObject.h"
 
 /**
 *
